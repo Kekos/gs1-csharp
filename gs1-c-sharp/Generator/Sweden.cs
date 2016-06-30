@@ -42,7 +42,16 @@ namespace Kekos.Gs1.Generator
                 int modulator;
                 string weight_str = SubstringMax(weight.ToString(numberFormat).Replace(".", ""), 0, 4);
 
-                decimals = Math.Max(1, Math.Min(3, decimals));
+                if (decimals == 0)
+                {
+                    decimals = 3;
+                    weight_str += "000";
+                }
+                else
+                {
+                    decimals = Math.Max(1, Math.Min(3, decimals));
+                }
+
                 modulator = weight_modulators[decimals];
 
                 gtin.SetPart(2, "2" + modulator);
